@@ -1,6 +1,6 @@
 package id.ramadani.retrx
 
-import retrofit2.Call
+import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -10,7 +10,9 @@ import retrofit2.http.Query
 interface UsgsService {
 
     @GET("fdsnws/event/1/query")
-    fun earthQuakes(@Query("format") format: String, @Query("eventtype") eventtype: String,
-                    @Query("orderby") orderby: String, @Query("minmag") minmag: Double,
-                    @Query("limit") limit: Int): Call<EarthQuakeCollection>
+    fun earthQuakes(@Query("format") format: String = "geojson",
+                    @Query("eventtype") eventtype: String = "earthquake",
+                    @Query("orderby") orderby: String = "time",
+                    @Query("minmag") minmag: Double,
+                    @Query("limit") limit: Int): Observable<EarthQuakeCollection>
 }
